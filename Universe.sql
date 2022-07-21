@@ -1,36 +1,3 @@
---
--- PostgreSQL database dump
---
-
--- Dumped from database version 12.9 (Ubuntu 12.9-2.pgdg20.04+1)
--- Dumped by pg_dump version 12.9 (Ubuntu 12.9-2.pgdg20.04+1)
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
-SET client_encoding = 'UTF8';
-SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
-SET check_function_bodies = false;
-SET xmloption = content;
-SET client_min_messages = warning;
-SET row_security = off;
-
-DROP DATABASE universe;
---
--- Name: universe; Type: DATABASE; Schema: -; Owner: freecodecamp
---
-
-CREATE DATABASE universe WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'C.UTF-8' LC_CTYPE = 'C.UTF-8';
-
-
-ALTER DATABASE universe OWNER TO freecodecamp;
-
-\connect universe
-
-SET statement_timeout = 0;
-SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -133,10 +100,10 @@ CREATE TABLE public.planet (
     name character varying(50) NOT NULL,
     has_water boolean,
     description text,
-    distance numeric(10,3) NOT NULL,
     age_in_millions_of_years integer NOT NULL,
     has_moons boolean NOT NULL,
-    star_id integer NOT NULL
+    star_id integer NOT NULL,
+    distance bigint NOT NULL
 );
 
 
@@ -315,6 +282,15 @@ INSERT INTO public.galaxy VALUES (7, 'Sagittarius Dwarf Sphr', 78000, NULL, 'Thi
 -- Data for Name: planet; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.planet VALUES (3, 'Mars', true, 'Mars is the fourth planet in the solar system and the second smallest planet', 4603, true, 1, 102000000);
+INSERT INTO public.planet VALUES (4, 'Mercury', true, 'Mercury is the smallest planet in the solar system and the closest to the Sun', 4503, false, 1, 222000000);
+INSERT INTO public.planet VALUES (5, 'Uranus', true, 'Uranus is the seven planet in the solar system this is a giant planet', 4503, true, 1, 430000000);
+INSERT INTO public.planet VALUES (2, 'Earth', true, 'This is our beautifull planet', 4543, true, 1, 0);
+INSERT INTO public.planet VALUES (7, 'Venus', false, 'This is the second planet in the solar system also is the second brightest natural object in the solar system after the moon', 4503, false, 1, 40000000);
+INSERT INTO public.planet VALUES (8, 'Jupiter', true, 'Jupiter is the fifth planet from the Sun and the largest in the Solar System', 4603, true, 1, 588000000);
+INSERT INTO public.planet VALUES (9, 'Saturn', true, 'Is the sixth planet form the Sun and the second largest of the solar system, it is a gas giant', 4503, true, 1, 1400000000000);
+INSERT INTO public.planet VALUES (10, 'Neptune', true, 'This is the eighth planet from the Sun and the farthest know solar planet', 4503, true, 1, 4500000000000);
+INSERT INTO public.planet VALUES (12, 'Kepler-1520b', false, 'This is an exoplanet whor orbits the star type K and that is doomed to disappear', 4703, false, 9, 2020);
 
 
 --
@@ -327,6 +303,7 @@ INSERT INTO public.star VALUES (4, 'Barnard Star', 'Is a red dwarf with a large 
 INSERT INTO public.star VALUES (5, 'CN Leonis', 'This star is a red dwarf located in the constellation Leo, near the ecliptic', 'M6.0V', 225, 'Red', false, false, 1, 7.855, 3500);
 INSERT INTO public.star VALUES (6, 'Sirius A', 'This star was formed during the collapsing of a molecular cloud', 'A1V', 230, NULL, false, true, 1, 8.582, 9900);
 INSERT INTO public.star VALUES (8, 'Epsilon Eridani', 'This is a star in the southern constellation of Eridanius', 'K2V', 100, NULL, false, false, 1, 10.522, 5100);
+INSERT INTO public.star VALUES (9, 'Kepler 1520', 'This is a orange star og spectral class', 'K4V', 4470, 'Orange-Yellow', false, false, 1, 2074.400, 4677);
 
 
 --
@@ -347,7 +324,7 @@ SELECT pg_catalog.setval('public.moon_planet_id_seq', 1, false);
 -- Name: planet_planet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.planet_planet_id_seq', 1, true);
+SELECT pg_catalog.setval('public.planet_planet_id_seq', 12, true);
 
 
 --
@@ -368,7 +345,7 @@ SELECT pg_catalog.setval('public.star_galaxy_id_seq', 1, false);
 -- Name: star_star_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.star_star_id_seq', 8, true);
+SELECT pg_catalog.setval('public.star_star_id_seq', 9, true);
 
 
 --
@@ -462,4 +439,3 @@ ALTER TABLE ONLY public.star
 --
 -- PostgreSQL database dump complete
 --
-
