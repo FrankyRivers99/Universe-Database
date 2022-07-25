@@ -1,3 +1,36 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 12.9 (Ubuntu 12.9-2.pgdg20.04+1)
+-- Dumped by pg_dump version 12.9 (Ubuntu 12.9-2.pgdg20.04+1)
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+DROP DATABASE universe;
+--
+-- Name: universe; Type: DATABASE; Schema: -; Owner: freecodecamp
+--
+
+CREATE DATABASE universe WITH TEMPLATE = template0 ENCODING = 'UTF8' LC_COLLATE = 'C.UTF-8' LC_CTYPE = 'C.UTF-8';
+
+
+ALTER DATABASE universe OWNER TO freecodecamp;
+
+\connect universe
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -100,10 +133,10 @@ CREATE TABLE public.planet (
     name character varying(50) NOT NULL,
     has_water boolean,
     description text,
-    age_in_millions_of_years integer NOT NULL,
-    has_moons boolean NOT NULL,
+    age_in_millions_of_years integer,
+    has_moons boolean,
     star_id integer NOT NULL,
-    distance bigint NOT NULL
+    distance bigint
 );
 
 
@@ -291,6 +324,11 @@ INSERT INTO public.planet VALUES (8, 'Jupiter', true, 'Jupiter is the fifth plan
 INSERT INTO public.planet VALUES (9, 'Saturn', true, 'Is the sixth planet form the Sun and the second largest of the solar system, it is a gas giant', 4503, true, 1, 1400000000000);
 INSERT INTO public.planet VALUES (10, 'Neptune', true, 'This is the eighth planet from the Sun and the farthest know solar planet', 4503, true, 1, 4500000000000);
 INSERT INTO public.planet VALUES (12, 'Kepler-1520b', false, 'This is an exoplanet whor orbits the star type K and that is doomed to disappear', 4703, false, 9, 2020);
+INSERT INTO public.planet VALUES (13, 'HD 209458 b', false, 'This planet is constantly being devoured by his own star acquiring an appirence similar to a comet', NULL, false, 12, NULL);
+INSERT INTO public.planet VALUES (14, 'TrES-2b', true, 'This isthe darkest planet int the cosmos that because only reflects less than 1% of the light it receives from it is star', NULL, false, 10, NULL);
+INSERT INTO public.planet VALUES (15, 'Gliese 581 c', true, 'This planet is the perfect example of take things to the extreme, having a side where the temperatures are over the 3458 and in the other side temperatures below zero ', NULL, false, 11, NULL);
+INSERT INTO public.planet VALUES (16, 'PSR B1620-26 b', true, 'This is the more older planet in our Galaxy with more of 12425 millions of years', NULL, true, 13, NULL);
+INSERT INTO public.planet VALUES (17, '55 Cancri e', true, 'This planet is very eccentric due to the fact that a third part of it is made up of diamond that gives you a cost of 27 quintillion dollars ', NULL, false, 13, NULL);
 
 
 --
@@ -304,6 +342,11 @@ INSERT INTO public.star VALUES (5, 'CN Leonis', 'This star is a red dwarf locate
 INSERT INTO public.star VALUES (6, 'Sirius A', 'This star was formed during the collapsing of a molecular cloud', 'A1V', 230, NULL, false, true, 1, 8.582, 9900);
 INSERT INTO public.star VALUES (8, 'Epsilon Eridani', 'This is a star in the southern constellation of Eridanius', 'K2V', 100, NULL, false, false, 1, 10.522, 5100);
 INSERT INTO public.star VALUES (9, 'Kepler 1520', 'This is a orange star og spectral class', 'K4V', 4470, 'Orange-Yellow', false, false, 1, 2074.400, 4677);
+INSERT INTO public.star VALUES (10, 'TrES-2 A', 'This star is simillar to our Sun but is in the constellation of Draco', 'G0V', NULL, 'Orange-Yellow', false, true, 2, 704.000, 5850);
+INSERT INTO public.star VALUES (11, 'Gliese 581', 'This is a read dwarf who also is in the list of the one hundred stars more close to the earth', ' M3V', NULL, 'Red-Orange', false, false, 2, 20.500, 3480);
+INSERT INTO public.star VALUES (12, 'HD 209458', 'This is an 8th magnitude star in the constellation of Pegasus', 'G0V', NULL, 'Yellow-Orange', false, false, 2, 159.500, 6071);
+INSERT INTO public.star VALUES (13, 'PSR B1620-26', 'This is star in a binary system in the constellation of Scorpius', 'Unknown', NULL, NULL, false, true, 2, 44500.000, NULL);
+INSERT INTO public.star VALUES (14, 'rho01 Cnc c', 'This is a unknown star in the constellation of Cancer', 'Unknown', NULL, NULL, false, false, 2, NULL, NULL);
 
 
 --
@@ -324,7 +367,7 @@ SELECT pg_catalog.setval('public.moon_planet_id_seq', 1, false);
 -- Name: planet_planet_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.planet_planet_id_seq', 12, true);
+SELECT pg_catalog.setval('public.planet_planet_id_seq', 17, true);
 
 
 --
@@ -345,7 +388,7 @@ SELECT pg_catalog.setval('public.star_galaxy_id_seq', 1, false);
 -- Name: star_star_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
 --
 
-SELECT pg_catalog.setval('public.star_star_id_seq', 9, true);
+SELECT pg_catalog.setval('public.star_star_id_seq', 14, true);
 
 
 --
@@ -439,3 +482,4 @@ ALTER TABLE ONLY public.star
 --
 -- PostgreSQL database dump complete
 --
+

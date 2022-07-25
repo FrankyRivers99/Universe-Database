@@ -1,0 +1,1 @@
+En esta version se terminaron de llenar los valores de los planetas para tener un minimo de 14 así como tambien se agregaron mas estrellas que no se habian puesto antes para los planetas agregados
