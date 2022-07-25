@@ -1,1 +1,6 @@
+Commit-Version:
 En esta version se terminaron de llenar los valores de los planetas para tener un minimo de 14 así como tambien se agregaron mas estrellas que no se habian puesto antes para los planetas agregados
+Commit-Version:
+En este commit se agregaron todas las lunas faltantes de los planetas. En total 20 y se modificaron varios campos en las tablas.
+
+

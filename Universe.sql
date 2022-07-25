@@ -90,11 +90,10 @@ ALTER SEQUENCE public.galaxy_galaxy_id_seq OWNED BY public.galaxy.galaxy_id;
 CREATE TABLE public.moon (
     moon_id integer NOT NULL,
     name character varying(50) NOT NULL,
-    distance numeric(10,3) NOT NULL,
+    distance bigint NOT NULL,
     age_in_millions_of_years integer,
     description text,
     has_water boolean,
-    mass integer,
     has_minerals boolean,
     planet_id integer NOT NULL
 );
@@ -309,6 +308,26 @@ INSERT INTO public.galaxy VALUES (7, 'Sagittarius Dwarf Sphr', 78000, NULL, 'Thi
 -- Data for Name: moon; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
+INSERT INTO public.moon VALUES (1, 'The moon', 384401, 4530, 'This is the only natural satellite of the earth, at abour one-quarter the diameter of earth, also is the fifth largest satellite in the solar system', true, true, 2);
+INSERT INTO public.moon VALUES (2, 'Ganimedes', 628300000, 3500, 'This is the largest natural satellite in our solar system and Jupiter also is the seventh closest to the earth', true, true, 8);
+INSERT INTO public.moon VALUES (3, 'Titan', 3000000, 4003, 'Titan is the largest satellite of Saturn and the second-largest satellite in the Solar System', true, true, 9);
+INSERT INTO public.moon VALUES (4, 'Callisto', 623000000, 4503, 'Callisto is the second-largest moon of Jupiter, was discovered in 1610 by Galileo Galilei', true, true, 8);
+INSERT INTO public.moon VALUES (5, 'Io', 628300000, NULL, 'This moon has the most higher density of moons and the least amount of water', true, true, 8);
+INSERT INTO public.moon VALUES (6, 'Europa', 628300000, NULL, 'Is the smallest of the four Galilean moons orbiting Jupiter', true, true, 8);
+INSERT INTO public.moon VALUES (7, 'Triton', 4338000000, NULL, 'Triton is the largest satellite of the planet Neptune and was the first Neptunian moon to be discovered', true, true, 10);
+INSERT INTO public.moon VALUES (8, 'Rhea', 1272000000, NULL, 'Rhea is the second-largest moon of Saturn and the ninth-largest moon in the solar system', true, true, 9);
+INSERT INTO public.moon VALUES (9, 'Iapetus', 1272000000, NULL, 'Iapetus is the third-largest natural satellite of Saturn', true, true, 9);
+INSERT INTO public.moon VALUES (10, 'Dione', 1272000000, NULL, 'Dione is a moon of Saturn.It was discovered by italian astronomer Giovanni Domenico Cassini', true, true, 9);
+INSERT INTO public.moon VALUES (11, 'Tethys', 1272000000, NULL, 'Tethys is a mid sized moon of Saturn.It was discovered by G.D Cassini in 1684', true, true, 9);
+INSERT INTO public.moon VALUES (12, 'Oberon', 2721400000, NULL, 'Oberon is the outermost major moon of the planet Uranus', true, true, 5);
+INSERT INTO public.moon VALUES (13, 'Umbriel', 2721404000, NULL, 'Umbriel is a moon of Uranus covered by nuerous impact craters reaching 210km in diameter', true, true, 5);
+INSERT INTO public.moon VALUES (14, 'Enceladus', 1272000000, NULL, 'Enceladus is the sixth-largest moon of Saturn and it is about 500 kilometers in diameter', true, true, 9);
+INSERT INTO public.moon VALUES (15, 'Phobos', 77790000, 4503, 'Phobos is the innermost and larger of the two natural satellites of Mars', true, true, 3);
+INSERT INTO public.moon VALUES (16, 'Deimos', 77790000, 4503, 'Deimos is the smaller and outermost of the moons of Mars with a mean radius of 6.2 Km and takes 30.3 hours to orbit Mars', true, true, 3);
+INSERT INTO public.moon VALUES (17, 'Thalassa', 4500000000, NULL, 'Is the second-innermost satellite of Neptune this satellite was named after sea goddess Thalassa', true, true, 10);
+INSERT INTO public.moon VALUES (18, 'Prometheus', 1350000000, NULL, 'Prometheus is an inner satellite of Saturn, it was discovered in 1980 from photos taken by the Voyager', false, false, 9);
+INSERT INTO public.moon VALUES (19, 'Larissa', 4450000000, NULL, 'Larissa is the fifth-closest inner satellite of Neptune named after Larissa, a lover of Poseidon in greek mythology', false, false, 10);
+INSERT INTO public.moon VALUES (20, 'Puck', 4200900000, NULL, 'Puck is an inner moon of Uranus.It was discovered in December 1985 by the Voyager 2', false, false, 5);
 
 
 --
@@ -392,27 +411,11 @@ SELECT pg_catalog.setval('public.star_star_id_seq', 14, true);
 
 
 --
--- Name: galaxy galaxy_description_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
---
-
-ALTER TABLE ONLY public.galaxy
-    ADD CONSTRAINT galaxy_description_key UNIQUE (description);
-
-
---
 -- Name: galaxy galaxy_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.galaxy
     ADD CONSTRAINT galaxy_pkey PRIMARY KEY (galaxy_id);
-
-
---
--- Name: moon moon_description_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
---
-
-ALTER TABLE ONLY public.moon
-    ADD CONSTRAINT moon_description_key UNIQUE (description);
 
 
 --
@@ -424,11 +427,35 @@ ALTER TABLE ONLY public.moon
 
 
 --
--- Name: planet planet_description_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+-- Name: galaxy name_galaxy_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.galaxy
+    ADD CONSTRAINT name_galaxy_key UNIQUE (name);
+
+
+--
+-- Name: star name_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.star
+    ADD CONSTRAINT name_key UNIQUE (name);
+
+
+--
+-- Name: moon name_moon_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.moon
+    ADD CONSTRAINT name_moon_key UNIQUE (name);
+
+
+--
+-- Name: planet name_planet_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.planet
-    ADD CONSTRAINT planet_description_key UNIQUE (description);
+    ADD CONSTRAINT name_planet_key UNIQUE (name);
 
 
 --
@@ -437,14 +464,6 @@ ALTER TABLE ONLY public.planet
 
 ALTER TABLE ONLY public.planet
     ADD CONSTRAINT planet_pkey PRIMARY KEY (planet_id);
-
-
---
--- Name: star star_description_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
---
-
-ALTER TABLE ONLY public.star
-    ADD CONSTRAINT star_description_key UNIQUE (description);
 
 
 --
@@ -482,4 +501,3 @@ ALTER TABLE ONLY public.star
 --
 -- PostgreSQL database dump complete
 --
-
