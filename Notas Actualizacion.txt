@@ -1,6 +1,9 @@
+Antes de realizar cualquier cambio favor de poner el ultimo commit que se tiene
+
 Commit-Version: 223ba
 En esta version se terminaron de llenar los valores de los planetas para tener un minimo de 14 así como tambien se agregaron mas estrellas que no se habian puesto antes para los planetas agregados
 Commit-Version: 8407ed
 En este commit se agregaron todas las lunas faltantes de los planetas. En total 20 y se modificaron varios campos en las tablas.
-
-
+--Se cambio a una nueva rama para las pruebas
+Commit-Version:
+En este commit se hicieron pruebas para ver cual era la mejor tabla a agregar y se decidio hacer una tabla que tuviera los sistemas solares respecto a las estrellas.

@@ -186,6 +186,41 @@ ALTER SEQUENCE public.planet_star_id_seq OWNED BY public.planet.star_id;
 
 
 --
+-- Name: solar_system; Type: TABLE; Schema: public; Owner: freecodecamp
+--
+
+CREATE TABLE public.solar_system (
+    solar_system_id integer NOT NULL,
+    name character varying(20) NOT NULL,
+    known_planets integer
+);
+
+
+ALTER TABLE public.solar_system OWNER TO freecodecamp;
+
+--
+-- Name: solar_system_solar_system_id_seq; Type: SEQUENCE; Schema: public; Owner: freecodecamp
+--
+
+CREATE SEQUENCE public.solar_system_solar_system_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.solar_system_solar_system_id_seq OWNER TO freecodecamp;
+
+--
+-- Name: solar_system_solar_system_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: freecodecamp
+--
+
+ALTER SEQUENCE public.solar_system_solar_system_id_seq OWNED BY public.solar_system.solar_system_id;
+
+
+--
 -- Name: star; Type: TABLE; Schema: public; Owner: freecodecamp
 --
 
@@ -279,6 +314,13 @@ ALTER TABLE ONLY public.planet ALTER COLUMN star_id SET DEFAULT nextval('public.
 
 
 --
+-- Name: solar_system solar_system_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.solar_system ALTER COLUMN solar_system_id SET DEFAULT nextval('public.solar_system_solar_system_id_seq'::regclass);
+
+
+--
 -- Name: star star_id; Type: DEFAULT; Schema: public; Owner: freecodecamp
 --
 
@@ -351,6 +393,24 @@ INSERT INTO public.planet VALUES (17, '55 Cancri e', true, 'This planet is very 
 
 
 --
+-- Data for Name: solar_system; Type: TABLE DATA; Schema: public; Owner: freecodecamp
+--
+
+INSERT INTO public.solar_system VALUES (1, 'Soon', 8);
+INSERT INTO public.solar_system VALUES (3, 'Rigil Kentaurus', 0);
+INSERT INTO public.solar_system VALUES (4, 'Barnard Star', 0);
+INSERT INTO public.solar_system VALUES (5, 'CN Leonis', 2);
+INSERT INTO public.solar_system VALUES (6, 'Sirius A', 0);
+INSERT INTO public.solar_system VALUES (8, 'Epsilon Eridani', 1);
+INSERT INTO public.solar_system VALUES (9, 'Kepler 1520', 1);
+INSERT INTO public.solar_system VALUES (10, 'TrES-2 A', 1);
+INSERT INTO public.solar_system VALUES (11, 'Gliese 581', 6);
+INSERT INTO public.solar_system VALUES (12, 'HD 209458', 1);
+INSERT INTO public.solar_system VALUES (13, 'PSR B1620-26', 1);
+INSERT INTO public.solar_system VALUES (14, 'rho01 Cnc c', 1);
+
+
+--
 -- Data for Name: star; Type: TABLE DATA; Schema: public; Owner: freecodecamp
 --
 
@@ -394,6 +454,13 @@ SELECT pg_catalog.setval('public.planet_planet_id_seq', 17, true);
 --
 
 SELECT pg_catalog.setval('public.planet_star_id_seq', 1, false);
+
+
+--
+-- Name: solar_system_solar_system_id_seq; Type: SEQUENCE SET; Schema: public; Owner: freecodecamp
+--
+
+SELECT pg_catalog.setval('public.solar_system_solar_system_id_seq', 1, false);
 
 
 --
@@ -459,11 +526,27 @@ ALTER TABLE ONLY public.planet
 
 
 --
+-- Name: solar_system name_ss_key; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.solar_system
+    ADD CONSTRAINT name_ss_key UNIQUE (name);
+
+
+--
 -- Name: planet planet_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
 --
 
 ALTER TABLE ONLY public.planet
     ADD CONSTRAINT planet_pkey PRIMARY KEY (planet_id);
+
+
+--
+-- Name: solar_system solar_system_pkey; Type: CONSTRAINT; Schema: public; Owner: freecodecamp
+--
+
+ALTER TABLE ONLY public.solar_system
+    ADD CONSTRAINT solar_system_pkey PRIMARY KEY (solar_system_id);
 
 
 --
@@ -501,3 +584,4 @@ ALTER TABLE ONLY public.star
 --
 -- PostgreSQL database dump complete
 --
+
